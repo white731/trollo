@@ -10,10 +10,6 @@ class BoardsController < ApplicationController
     @list_new = @board.lists.new
   end
 
-  def create_list
-    @board.lists.create(list_params)
-  end
-
   def edit
   end
 
@@ -39,7 +35,6 @@ class BoardsController < ApplicationController
   def destroy
     @board.destroy
     redirect_to boards_path
-    
   end
 
   private
@@ -52,8 +47,8 @@ class BoardsController < ApplicationController
     params.require(:board).permit(:title, :user_id)
   end
 
-  def list_params
-    params.require(:list).permit(:title, :id)
-end
+  # def list_params
+  #   params.require(:list).permit(:title, :id)
+  # end
 
 end
