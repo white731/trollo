@@ -47,8 +47,4 @@ class BoardsController < ApplicationController
     params.require(:board).permit(:title, :user_id)
   end
 
-  # def list_params
-  #   params.require(:list).permit(:title, :id)
-  # end
-
 end
