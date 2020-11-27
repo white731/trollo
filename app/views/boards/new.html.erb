@@ -1,0 +1,10 @@
+<h1>Create a Board</h1>
+
+  <%= form_with(model: @board, local: true) do |f| %>
+  <div class="field">
+    
+    <%= f.text_field :title, required: true, placeholder: "Board Title" %>
+  </div>
+
+  <%= f.submit class: "btn waves-effect waves-light"%>
+<% end %>
