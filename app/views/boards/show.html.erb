@@ -1,2 +1,22 @@
-<h1>Boards#show</h1>
-<p>Find me in app/views/boards/show.html.erb</p>
+<h1><%="#{@board.title} Board"%></h1>
+<p><%= link_to "Create new list", new_board_list_path(@board)%> </p>
+
+
+<p>
+<% @lists.each do |list|%>
+<%= "#{list.title} List"%>
+<ul>
+    
+    <% list.tasks.each do |task| %>
+    <li>
+    <%= task.title%>
+    </li>
+    <% end %>
+    
+</ul>
+<br>
+<% end %>
+
+
+
+</p>
