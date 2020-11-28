@@ -1,29 +1,34 @@
 <h1><%="#{@board.title} Board"%></h1>
 <p><%=link_to "Back to All Boards", boards_path%></p>
-
 <%= render partial: "lists/new"%>
-
-<p>
 <% @lists.each do |list|%>
-<%= "#{list.title} List"%>
-<%= link_to "Delete list", board_list_path(@board, list.id), method: :delete%>
-<ul>
-    <%= form_for [list, Task.new] do |f| %>
-      <div class="field">
-    <%= f.text_field :title, required: true, placeholder: "Task Name" %>
+<div class="col s12 m6">
+  <div class = "card blue-grey darken-1">
+    <div class="card-content white-text">
+      <div class = "card-title">
+        <%= "#{list.title} List"%>
+          </div>  
+          <ul>
+              <%= form_for [list, Task.new] do |f| %>
+                <div class="field">
+              <%= f.text_field :title, required: true, placeholder: "Task Name" %>
+                </div>
+              <%= f.submit class: "btn waves-effect waves-light"%>
+              <br>
+              <% end %>
+              
+              <% list.tasks.each do |task| %>
+              <br>
+              <li>
+              <%= task.title%>
+              <%= link_to "Delete", list_task_path(list, task), method: :delete%>
+              </li>
+    <% end %>
+    <div class="card-action">
+        <%= link_to "Delete list", board_list_path(@board, list.id), method: :delete%>
       </div>
-    <%= f.submit class: "btn waves-effect waves-light"%>
-    <% end %>
-    
-    <% list.tasks.each do |task| %>
-    <li>
-    <%= task.title%>
-    </li>
-    <% end %>
+    </div>
+  </div> 
+ </div> 
 </ul>
-<br>
 <% end %>
-
-
-
-</p>

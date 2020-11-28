@@ -1,4 +1,4 @@
-<h1>Welcome to Trollo</h1>
+<h1>Welcome to Trollo <%="#{current_user.first_name} #{current_user.last_name}"%></h1>
 <div class="btn light-blue lighten-5">
 <%=link_to "Create a Board", new_board_path%>
 </div>

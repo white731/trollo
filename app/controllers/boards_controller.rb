@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_id, only: [:show, :edit, :update, :destroy, :create_list]
+  before_action :set_id, only: [:show, :edit, :update, :destroy]
 
   def index
     @boards = current_user.boards.all
@@ -7,7 +7,8 @@ class BoardsController < ApplicationController
 
   def show
     @lists = @board.lists.all
-    @list_new = @board.lists.new
+    
+    # @list = show_lists_for_selected_board(user_id, board_id)
   end
 
   def edit

@@ -11,6 +11,14 @@ class TasksController < ApplicationController
         redirect_to board_path(@board)
     end
 
+    def destroy
+        @list = List.find(params[:list_id])
+        @task = @list.tasks.find(params[:id])
+        @board = @list.board_id
+        @task.destroy
+        redirect_to board_path(@board)
+    end
+
 private
 
 def task_params
