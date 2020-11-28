@@ -32,3 +32,13 @@
  </div> 
 </ul>
 <% end %>
+
+
+<h1>Sql results</h1>
+
+<%@lists_sql.each do |s|%>
+<%=s.list_title%>
+<br>
+<%end%>
+
+<%= @lists_sql.first.board_title%>

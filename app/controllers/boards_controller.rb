@@ -3,12 +3,12 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards.all
+    @boards_sql = Board.all_boards(current_user.id)
   end
 
   def show
     @lists = @board.lists.all
-    
-    # @list = show_lists_for_selected_board(user_id, board_id)
+    @lists_sql = Board.show_lists_for_selected_board(current_user.id, params[:id])
   end
 
   def edit
