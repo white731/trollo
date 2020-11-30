@@ -1,0 +1,6 @@
+  <%= form_for [@board, @list, @task] do |f| %>
+  <div class="field">
+    <%= f.text_field :title, required: true, placeholder: "Task Name" %>
+  </div>
+  <%= f.submit class: "btn waves-effect waves-light"%>
+<% end %>
