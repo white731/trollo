@@ -9,6 +9,7 @@ class BoardsController < ApplicationController
   def show
     @lists = @board.lists.all
     @lists_sql = Board.show_lists_for_selected_board(current_user.id, params[:id])
+    @board_title = Board.selected_board(current_user.id, params[:id])
   end
 
   def edit

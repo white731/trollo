@@ -1,4 +1,4 @@
-<h1><%="#{@board.title} Board"%></h1>
+<h1><%="#{@board_title.board_title} Board"%></h1>
 <p><%=link_to "Back to All Boards", boards_path%></p>
 <%= render partial: "lists/new"%>
 <% @lists.each do |list|%>
@@ -36,9 +36,19 @@
 
 <h1>Sql results</h1>
 
+<h3>Board Title</h3>
+<%=@board_title.board_title%>
+
+<h3>Lists</h3>
 <%@lists_sql.each do |s|%>
-<%=s.list_title%>
+<ul>
+<%=s.title%>
+<h3>Tasks</h3>
+<%Board.task_list(current_user.id,@board.id,s.id).each do |s|%>
+<li>
+<%= s.task_title%>
+</li>
+<% end %>
+</ul>
 <br>
 <%end%>
-
-<%= @lists_sql.first.board_title%>
