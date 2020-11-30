@@ -1,7 +1,7 @@
 <h1><%="#{@board_title.board_title} Board"%></h1>
 <p><%=link_to "Back to All Boards", boards_path%></p>
 <%= render partial: "lists/new"%>
-<% @lists.each do |list|%>
+<% @lists_sql.each do |list|%>
 <div class="col s12 m6">
   <div class = "card blue-grey darken-1">
     <div class="card-content white-text">
@@ -9,7 +9,7 @@
         <%= "#{list.title} List"%>
           </div>  
           <ul>
-              <%= form_for [list, Task.new] do |f| %>
+              <%= form_for [@lists.find(list.id), Task.new] do |f| %>
                 <div class="field">
               <%= f.text_field :title, required: true, placeholder: "Task Name" %>
                 </div>
@@ -17,11 +17,12 @@
               <br>
               <% end %>
               
-              <% list.tasks.each do |task| %>
+              <% Board.task_list(current_user.id,@board.id,list.id).each do |task| %>
               <br>
               <li>
-              <%= task.title%>
-              <%= link_to "Delete", list_task_path(list, task), method: :delete%>
+              <%= task.task_title%>
+              <%= link_to "Delete", list_task_path(@lists.find(list.id), task.board_id), method: :delete%>
+              <%= link_to "Edit", edit_list_task_path(@lists.find(list.id), task.task_id)%>
               </li>
     <% end %>
     <div class="card-action">
@@ -34,21 +35,4 @@
 <% end %>
 
 
-<h1>Sql results</h1>
 
-<h3>Board Title</h3>
-<%=@board_title.board_title%>
-
-<h3>Lists</h3>
-<%@lists_sql.each do |s|%>
-<ul>
-<%=s.title%>
-<h3>Tasks</h3>
-<%Board.task_list(current_user.id,@board.id,s.id).each do |s|%>
-<li>
-<%= s.task_title%>
-</li>
-<% end %>
-</ul>
-<br>
-<%end%>
